@@ -34,7 +34,7 @@ public class EmployeeController {
         // add to the spring model
         theModel.addAttribute("employees", theEmployees);
 
-        return "/employees/list-employees";
+        return "list-employees";
     }
 
     @GetMapping("/showFormForAdd")
@@ -45,7 +45,7 @@ public class EmployeeController {
 
         theModel.addAttribute("employee", theEmployee);
 
-        return "/employees/employee-form";
+        return "employee-form";
     }
 
     @GetMapping("/showFormForUpdate")
@@ -59,7 +59,7 @@ public class EmployeeController {
         theModel.addAttribute("employee", theEmployee);
 
         // send over to our form
-        return "/employees/employee-form";
+        return "employee-form";
     }
 
 
@@ -84,5 +84,15 @@ public class EmployeeController {
         return "redirect:/employees/list";
 
     }
+
+//    @GetMapping("/login")
+//    public String showLoginPage() {
+//        return "login";
+//    }
+    @GetMapping("/access-denied")
+    public String accessDenied(){
+        return "access-denied";
+    }
+
 }
 
