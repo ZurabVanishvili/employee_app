@@ -90,6 +90,7 @@ public class EmployeeController {
     @PostMapping("/list")
     public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
         User user = userRepository.findByUsername(username);
+        model.addAttribute("log", false);
 
         if (user != null && user.getPassword().equals(password)) {
             List<Employee> theEmployees = employeeService.findAll();
