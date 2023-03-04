@@ -30,11 +30,9 @@
 			<input type="text" th:field="*{firstName}"
 					class="form-control mb-4 col-4" placeholder="First name">
 
-			<input type="text" th:field="*{lastName}"
-					class="form-control mb-4 col-4" placeholder="Last name">
 
-			<input type="text" th:field="*{email}"
-					class="form-control mb-4 col-4" placeholder="Email">
+			<input type="text" th:field="*{address}"
+					class="form-control mb-4 col-4" placeholder="Address">
 				
 			<button type="submit" class="btn btn-info col-2">Save</button>
 						

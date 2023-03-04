@@ -45,8 +45,7 @@
         <thead class="thead-dark">
         <tr>
             <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
+            <th>Address</th>
             <th  th:if="${log}" >Action</th>
         </tr>
         </thead>
@@ -55,8 +54,7 @@
         <tr th:each="tempEmployee : ${employees}">
 
             <td th:text="${tempEmployee.firstName}"/>
-            <td th:text="${tempEmployee.lastName}"/>
-            <td th:text="${tempEmployee.email}"/>
+            <td th:text="${tempEmployee.address}"/>
 
             <td>
 
