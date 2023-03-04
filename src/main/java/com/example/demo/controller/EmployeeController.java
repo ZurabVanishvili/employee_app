@@ -2,15 +2,15 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.EmployeeService;
 import com.example.demo.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployeeController {
 
     private EmployeeService employeeService;
+    @Autowired
+    private UserRepository userRepository;
 
     public EmployeeController(EmployeeService theEmployeeService) {
         employeeService = theEmployeeService;
@@ -25,7 +27,7 @@ public class EmployeeController {
 
     // add mapping for "/list"
 
-    @GetMapping("/list")
+    @RequestMapping(method = RequestMethod.GET, value = "/list")
     public String listEmployees(Model theModel) {
 
         // get employees from db
@@ -85,14 +87,26 @@ public class EmployeeController {
 
     }
 
-//    @GetMapping("/login")
-//    public String showLoginPage() {
-//        return "login";
-//    }
-    @GetMapping("/access-denied")
-    public String accessDenied(){
-        return "access-denied";
+    @PostMapping("/list")
+    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model, RedirectAttributes redirectAttrs) {
+        User user = userRepository.findByUsername(username);
+
+        if (user != null && user.getPassword().equals(password)) {
+            List<Employee> theEmployees = employeeService.findAll();
+
+            // add to the spring model
+            model.addAttribute("employees", theEmployees);
+
+            model.addAttribute("log", true);
+
+            return "list-employees";
+        } else {
+            model.addAttribute("error", "Invalid username or password");
+            return "loginPage";
+        }
     }
+
+
 
 }
 

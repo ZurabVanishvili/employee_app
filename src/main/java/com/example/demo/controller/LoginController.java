@@ -9,26 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
-    @Autowired
-    private UserRepository userRepository;
+
 
     @GetMapping("/loginPage")
     public String showLoginPage() {
         return "loginPage";
     }
 
-    @PostMapping("/employees/list")
-    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
-        User user = userRepository.findByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return "redirect:/employees/list";
-        } else {
-            model.addAttribute("error", "Invalid username or password");
-            return "loginPage";
-        }
-    }
+
+
 }
 

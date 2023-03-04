@@ -1,4 +1,6 @@
+
 <!DOCTYPE HTML>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -20,6 +22,7 @@
     <div class="container">
         <div class="navbar">
             <h3 class="text"> Employee Directory </h3>
+            <hr>
             <nav>
 
                 <a th:href="@{/loginPage}"
@@ -32,7 +35,7 @@
 
 
     <!-- Add a button -->
-    <a th:href="@{/employees/showFormForAdd}"
+    <a th:if="${log}" th:href="@{/employees/showFormForAdd}"
        class="btn btn-primary btn-sm mb-3">
         Add Employee
     </a>
@@ -44,7 +47,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Action</th>
+            <th  th:if="${log}" >Action</th>
         </tr>
         </thead>
 
@@ -56,14 +59,19 @@
             <td th:text="${tempEmployee.email}"/>
 
             <td>
-                <!-- Add "update" button/link -->
-                <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+
+
+                <a th:if="${log}" th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
 
+
+                <!-- Add "update" button/link -->
+
+
                 <!-- Add "delete" button/link -->
-                <a th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
+                <a  th:if="${log}" th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
                    class="btn btn-danger btn-sm"
                    onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
                     Delete
