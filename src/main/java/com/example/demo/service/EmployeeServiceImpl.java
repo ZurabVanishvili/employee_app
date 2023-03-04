@@ -18,10 +18,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository) {
 		employeeRepository = theEmployeeRepository;
 	}
-	
+
 	@Override
 	public List<Employee> findAll() {
 		return employeeRepository.findAllByOrderByFirstNameAsc();
+	}
+
+	@Override
+	public List<Employee> findByName(String first_name) {
+		return employeeRepository.findByFirstNameIgnoreCaseContaining(first_name);
 	}
 
 	@Override

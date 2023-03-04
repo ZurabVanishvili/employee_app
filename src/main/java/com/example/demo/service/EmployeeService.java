@@ -9,7 +9,9 @@ import java.util.List;
 public interface EmployeeService {
 
 	 List<Employee> findAll();
-	
+
+	 List<Employee> findByName(String first_name);
+
 	 Employee findById(int theId);
 	
 	 void save(Employee theEmployee);

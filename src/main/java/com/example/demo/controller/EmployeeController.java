@@ -88,7 +88,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/list")
-    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model, RedirectAttributes redirectAttrs) {
+    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
         User user = userRepository.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
@@ -104,6 +104,13 @@ public class EmployeeController {
             model.addAttribute("error", "Invalid username or password");
             return "loginPage";
         }
+    }
+
+    @GetMapping("/search")
+    public String searchEmployees(@RequestParam("first_name") String first_name, Model model) {
+        List<Employee> employees = employeeService.findByName(first_name);
+        model.addAttribute("employees", employees);
+        return "list-employees";
     }
 
 

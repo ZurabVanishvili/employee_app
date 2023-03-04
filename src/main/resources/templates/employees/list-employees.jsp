@@ -20,16 +20,25 @@
 <div class="container">
 
     <div class="container">
-        <div class="navbar">
-            <h3 class="text"> Employee Directory </h3>
-            <hr>
-            <nav>
+        <div class="row justify-content-between align-items-center">
+            <div class="col-sm-5">
+                <h3><a th:href="@{/employees/list}">Employee Directory</a></h3>
+            </div>
+            <div class="col-sm-6">
+                <form class="form-inline" th:action="@{/employees/search}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="first_name" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <a href="/loginPage" class="btn btn-primary ml-3">Sign In</a>
 
-                <a th:href="@{/loginPage}"
-                   class="btn btn-primary btn-sm mb-3 ">
-                    Sign In
-                </a>
-            </nav>
+                <a th:href="@{/export/csv}" class="btn btn-info">Export to CSV</a>
+            </div>
         </div>
     </div>
 
@@ -46,7 +55,7 @@
         <tr>
             <th>First Name</th>
             <th>Address</th>
-            <th  th:if="${log}" >Action</th>
+            <th>Action</th>
         </tr>
         </thead>
 
@@ -74,6 +83,8 @@
                    onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
                     Delete
                 </a>
+
+
 
             </td>
 
