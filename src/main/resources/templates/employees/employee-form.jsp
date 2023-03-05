@@ -31,7 +31,9 @@
         <input required type="text" th:field="*{address}"
                class="form-control mb-4 col-4" placeholder="Address">
 
-        <input th:field="*{image}" required type="file" name="photo" id="photo" class="form-control-file mb-4 col-4">
+        <input required type="text" th:field="*{image}"
+               class="form-control mb-4 col-4" placeholder="Link of Image">
+
 
         <div th:if="${error}" class="text-danger mb-3">
             <span th:text="${error}"></span>

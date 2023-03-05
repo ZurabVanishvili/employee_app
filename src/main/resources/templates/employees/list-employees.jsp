@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
           integrity="sha512-37M5VQx3q5hELkZ4D4z4t/9RtKK/0iPqtVjKpJx1xVbcOfwA2eTmvHkKjX9BbbCWbGSCyH7VIfSRT+nz2QV5OA=="
           crossorigin="anonymous"/>
@@ -16,6 +17,7 @@
 </head>
 
 <body>
+
 <div class="container">
 
     <div class="row justify-content-between align-items-center">
@@ -62,7 +64,21 @@
         <tr th:each="tempEmployee : ${employees}">
             <td th:text="${tempEmployee.firstName}"/>
             <td th:text="${tempEmployee.address}"/>
-            <td><a href="${tempEmployee.image}" target="_blank">View image</a> </td>
+            <td style="position: relative;">
+                <a th:href="${tempEmployee.image}" target="_blank">
+                    <img style="display: block;
+            margin-right: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;"
+                         th:src="${tempEmployee.image}" alt="Photo of ${tempEmployee.firstName}" />
+                </a>
+                <div style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);">
+                    <a th:href="${tempEmployee.image}" target="_blank">Click to Expand</a>
+                </div>
+            </td>
+
+
             <td th:if="${session.loggedIn}">
                 <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}" class="btn btn-info btn-sm">
                     Update
