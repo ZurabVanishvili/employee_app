@@ -5,16 +5,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-37M5VQx3q5hELkZ4D4z4t/9RtKK/0iPqtVjKpJx1xVbcOfwA2eTmvHkKjX9BbbCWbGSCyH7VIfSRT+nz2QV5OA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-37M5VQx3q5hELkZ4D4z4t/9RtKK/0iPqtVjKpJx1xVbcOfwA2eTmvHkKjX9BbbCWbGSCyH7VIfSRT+nz2QV5OA=="
+          crossorigin="anonymous"/>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
     <title>Employee Directory</title>
+
 </head>
 
 <body>
 <div class="container">
+
     <div class="row justify-content-between align-items-center">
         <div class="col-sm-5">
             <h3><a th:href="@{/employees/list}">Employee Directory</a></h3>
@@ -26,12 +29,15 @@
                         <input type="text" name="first_name" class="form-control" placeholder="Search">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-search"></i>
+                        <span class="input-group-text">
+                            <i class="search"></i>
+                        </span>
                             </button>
                         </div>
                     </div>
                 </form>
-                <a th:text="${session.loggedIn} ? 'Log Out' : 'Log In'" th:href="${session.loggedIn} ? '/employees/logout' : '/loginPage'" class="btn btn-primary ml-3"></a>
+                <a style="margin-right: 5px" th:text="${session.loggedIn} ? 'Log Out' : 'Log In'"
+                   th:href="${session.loggedIn} ? '/employees/logout' : '/loginPage'" class="btn btn-primary ml-3"></a>
 
                 <a th:href="@{/export/csv}" class="btn btn-info">Export to CSV</a>
             </div>
@@ -46,13 +52,15 @@
         <tr>
             <th>First Name</th>
             <th>Address</th>
-            <th th:if="${session.loggedIn}" >Action</th>
+            <th>Image</th>
+            <th th:if="${session.loggedIn}">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="tempEmployee : ${employees}">
             <td th:text="${tempEmployee.firstName}"/>
             <td th:text="${tempEmployee.address}"/>
+            <td><a href="${tempEmployee.image}" target="_blank">View image</a> </td>
             <td th:if="${session.loggedIn}">
                 <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}" class="btn btn-info btn-sm">
                     Update

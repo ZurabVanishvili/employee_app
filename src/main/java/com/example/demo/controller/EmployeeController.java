@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
@@ -41,9 +42,19 @@ public class EmployeeController {
 
         Employee theEmployee = new Employee();
 
+
         theModel.addAttribute("employee", theEmployee);
 
         return "employee-form";
+    }
+
+
+
+    @PostMapping("/saveEmployee")
+    public String saveEmployee( Model theModel) {
+
+
+        return "redirect:/employees/list";
     }
 
     @GetMapping("/showFormForUpdate")
@@ -60,7 +71,7 @@ public class EmployeeController {
 
 
     @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+    public String saveEmployee(@Valid @ModelAttribute("employee") Employee theEmployee) {
 
         employeeService.save(theEmployee);
 

@@ -17,12 +17,16 @@ public class Employee {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "image")
+    private String image;
+
 
     public Employee(){}
 
-    public Employee(String firstName, String address) {
+    public Employee(String firstName, String address,String image) {
         this.firstName = firstName;
         this.address = address;
+        this.image = image;
     }
 
     public int getId() {
@@ -49,14 +53,22 @@ public class Employee {
         this.address = lastName;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + address + '\'';
+                ", address='" + address + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }
 
