@@ -21,6 +21,8 @@
     <div class="row justify-content-between align-items-center">
         <div class="col-sm-5">
             <h3><a th:href="@{/employees/list}">Employee Directory</a></h3>
+            <hr>
+
         </div>
         <div class="col-sm-6 d-flex justify-content-end">
             <div class="d-flex align-items-center">
@@ -43,7 +45,7 @@
             </div>
         </div>
     </div>
-    <a th:if="${session.loggedIn}" th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+    <a th:if="${session.loggedIn}" th:href="@{/employees/showFormForAdd}" class="btn btn-success">
         Add Employee
     </a>
     <br><br>

@@ -50,12 +50,6 @@ public class EmployeeController {
 
 
 
-    @PostMapping("/saveEmployee")
-    public String saveEmployee( Model theModel) {
-
-
-        return "redirect:/employees/list";
-    }
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("employeeId") int theId,
@@ -63,7 +57,6 @@ public class EmployeeController {
 
         Employee theEmployee = employeeService.findById(theId);
 
-        // set employee as a model attribute to pre-populate the form
         theModel.addAttribute("employee", theEmployee);
 
         return "employee-form";
@@ -72,7 +65,6 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public String saveEmployee(@Valid @ModelAttribute("employee") Employee theEmployee) {
-
         employeeService.save(theEmployee);
 
         return "redirect:/employees/list";
@@ -120,7 +112,7 @@ public class EmployeeController {
     public String logout(HttpSession session, Model model) {
         List<Employee> theEmployees = employeeService.findAll();
 
-        session.setAttribute("loggedIn",false);
+        session.setAttribute("loggedIn", false);
         model.addAttribute("employees", theEmployees);
 
         session.invalidate();
