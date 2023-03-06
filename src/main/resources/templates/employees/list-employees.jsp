@@ -5,11 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
           integrity="sha512-37M5VQx3q5hELkZ4D4z4t/9RtKK/0iPqtVjKpJx1xVbcOfwA2eTmvHkKjX9BbbCWbGSCyH7VIfSRT+nz2QV5OA=="
           crossorigin="anonymous"/>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>Employee Directory</title>
@@ -29,17 +29,17 @@
         <div class="col-sm-6 d-flex justify-content-end">
             <div class="d-flex align-items-center">
                 <form class="form-inline mr-2" th:action="@{/employees/search}" method="get">
-                    <div class="input-group">
-                        <input type="text" name="first_name" class="form-control" placeholder="Search">
+                    <div class="input-group mb-3" style="margin-top: 13px">
+                        <input type="text" name="first_name" class="form-control" placeholder="Search...">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                        <span class="input-group-text">
-                            <i class="search"></i>
-                        </span>
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
+
                 </form>
+
                 <a style="margin-right: 5px" th:text="${session.loggedIn} ? 'Log Out' : 'Log In'"
                    th:href="${session.loggedIn} ? '/employees/logout' : '/loginPage'" class="btn btn-primary ml-3"></a>
 
@@ -65,21 +65,19 @@
             <td th:text="${tempEmployee.firstName}"/>
             <td th:text="${tempEmployee.address}"/>
             <td style="position: relative;">
-                <a th:href="${tempEmployee.image}" target="_blank">
                     <img style="display: block;
-            margin-right: auto;
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;"
-                         th:src="${tempEmployee.image}" alt="Photo of ${tempEmployee.firstName}" />
-                </a>
-                <div style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);">
-                    <a th:href="${tempEmployee.image}" target="_blank">Click to Expand</a>
+                        margin-right: 10px;
+                         width: 50px;
+                        height: 50px;
+                        border-radius: 10px;" class="employee-image" th:src="${tempEmployee.image}"
+                         alt="Photo of ${tempEmployee.firstName}" />
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <a style="display: block; text-align: center;" th:href="${tempEmployee.image}" target="_blank">Click to Expand</a>
                 </div>
             </td>
 
 
-            <td th:if="${session.loggedIn}">
+            <td th:if="${session.loggedIn}" style="width: 250px">
                 <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}" class="btn btn-info btn-sm">
                     Update
                 </a>

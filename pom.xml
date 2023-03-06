@@ -84,11 +84,6 @@
         </dependency>
 
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.security</groupId>-->
-<!--            <artifactId>spring-security-taglibs</artifactId>-->
-<!--            <version>${springsecurty.version}</version>-->
-<!--        </dependency>-->
 
 
         <dependency>
