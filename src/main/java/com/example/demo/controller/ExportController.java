@@ -22,14 +22,14 @@ public class ExportController {
 
     @GetMapping("/csv")
     public void exportToCsv( HttpServletResponse response) throws Exception {
-        // get the employees with the given name
+        
         List<Employee> employees = employeeService.findAll();
 
-        // set the response headers
+        
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
 
-        // write the data to the response
+        
         CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), CSVFormat.DEFAULT);
         csvPrinter.printRecord("Id", "First Name", "Address");
         for (Employee employee : employees) {
